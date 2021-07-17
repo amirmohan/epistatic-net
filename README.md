@@ -22,8 +22,8 @@ The EN software is conveniently available at `Epistatic Net (EN).ipynb`. The sof
 
 The scalable verions of the EN algorithm (EN-S) is available at `Scalable Epistatic Net (EN-S).ipynb`. In order to run the code follow these steps:
 
-1- Run `wht-sampling.ipynb` after setting the values for the number of mutations (n), the anticipated sparsity level (2^m), and number of delays per single bit (higher values increase robustness of the algorithm to noise, d={3,5,7} are good default values). Generate the uniform sampling patterns of proteins and store them in a folder.
+1- Run `wht-sampling.ipynb` after setting the values for the number of mutations (n), the anticipated sparsity level (2^m), and number of delays per single bit (higher values increase robustness of the algorithm to noise, d={3,5,7} are good default values). Generate the uniform sampling patterns of proteins and store them in a folder. Currently the default values are `n=13`, `m=4`, and `d=3` for the *E. quadricolor* fluorescent protein.
 
-2- Set 
+2- Set num_bits = n and 
 
 
