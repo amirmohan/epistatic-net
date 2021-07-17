@@ -20,4 +20,10 @@ This repository provides the EN package which includes the scripts required to i
 # Quick start
 The EN software is conveniently available at `Epistatic Net (EN).ipynb`. The software is simple and self-explanatory. 
 
+The scalable verions of the EN algorithm (EN-S) is available at `Scalable Epistatic Net (EN-S).ipynb`. In order to run the code follow these steps:
+
+1- Run `wht-sampling.ipynb` after setting the values for the number of mutations (n), the anticipated sparsity level (2^m), and number of delays per single bit (higher values increase robustness of the algorithm to noise, d={3,5,7} are good default values). Generate the uniform sampling patterns of proteins and store them in a folder.
+
+2- Set 
+
 
