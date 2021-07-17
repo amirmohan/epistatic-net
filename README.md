@@ -17,8 +17,5 @@ The paper is currenly under final round of revision at *Nature Communications*.
 
 This repository provides the EN package which includes the scripts required to implement the EN regularization algorithm at `Epistatic Net (EN).ipynb`, the scalable EN-S algorithm at `Scalable Epistatic Net (EN-S).ipynb`, and the dependencies such as the sparse WHT recovrey algorithm called [SPRIGHT](<https://arxiv.org/abs/1508.06336>).
 
-
-predict the DNA repair outcome as well as a complete set of trained SPROUT models. The trained models are stored in the `model` folder of the repository. The main script of the package is the `SPROUT_predict` script which loads the pretrained models, asks for input query depending on the mode selected, and outputs the predicted statistics of the repair outcome.  a
-
-
 # Quick start
+The EN software is conviniently available at `Epistatic Net (EN).ipynb`. The software is simple and self-explanatory. 
