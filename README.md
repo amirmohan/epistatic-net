@@ -3,13 +3,13 @@ Epistatic Net is an algorithm to regularize deep neural networks (DNNs) by promo
 
 Details of EN regularization is provided in the paper ["Sparse Epistatic Regularization of Deep Neural Networks for Inferring Fitness Functions"](<https://www.biorxiv.org/content/10.1101/2020.11.24.396994v3.abstract>), where we have demonstrated the perforamnce of EN in protein function prediction on various real-world biological landscapes including: 
 
-1- Four canonical bacterial fitness landscapes available at [this link](<https://github.com/harmslab/notebooks-nonlinear-high-order-epistasis>)
+1- Four canonical bacterial fitness landscapes, available at [this link](<https://github.com/harmslab/notebooks-nonlinear-high-order-epistasis>),
 
-2- *E. quadricolor* fluorescent protein available at [this link](<https://doi.org/10.1038/s41467-019-12130-8>)
+2- *E. quadricolor* fluorescent protein, available at [this link](<https://doi.org/10.1038/s41467-019-12130-8>),
 
-3- *Aequorea victoria* (avGFP) landscape available at [this link](<https://doi.org/10.6084/m9.figshare.3102154.v1>)
+3- Green fluorescent protein from *Aequorea victoria* (avGFP), available at [this link](<https://doi.org/10.6084/m9.figshare.3102154.v1>),
 
-4- available at [this link](<https://elifesciences.org/articles/16965/figures >) 
+4- Immunoglobulin-binding domain of protein G (GB1) available at [this link](<https://elifesciences.org/articles/16965/figures>).
 
 
 
