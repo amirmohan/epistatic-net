@@ -211,6 +211,13 @@ def bin_to_dec(x):
     n = len(x)
     c = 2**(np.arange(n)[::-1])
     return c.dot(x)
+        
+def bool2int(x):
+    y = 0
+    for i,j in enumerate(x):
+        y += j<<i
+    return y
+
 
 def get_sampling_index(x, A, p=0):
     """
@@ -272,7 +279,7 @@ def results_to_measurements(results):
 def get_delay_index_base(bit_index, delay_index, D):
     return 1+ 2*D*bit_index + 2*delay_index
 
-def estimate_location(u, num_bits=13, num_delays_per_bit=8):
+def estimate_location(u, num_bits=13, num_delays_per_bit=3):
     location = []
     for bit in range(num_bits):
         sign_total = 0
@@ -324,6 +331,7 @@ def make_system(support, sampling_locations, y, N=None):
     M = M % 2
     M = (-1)**M
     return (M, y)
+
 
 def train_it(support, U, y, reg, N=None):
     M, y = make_system(np.vstack(support), U, np.reshape(y,[-1]), N=N)
@@ -419,56 +427,61 @@ def make_system_simple(support, sampling_locations):
     return M
     
 class SPRIGHT:
-    def __init__(self, experiment_type, run_list, model_to_remove=None):
+    def __init__(self, experiment_type, run_list,sampling_matrix1,sampling_matrix2,sampling_matrix3,delays_matrix1,delays_matrix2,delays_matrix3,all_sampling_locations1,all_sampling_locations2,all_sampling_locations3, model_to_remove=None):
+        
         self.experiment_type = experiment_type
         self.run_list = run_list
         self.model_to_remove = model_to_remove
         
-    def set_train_data(self, U_train, y_train):
+        self.sampling_matrix1 = sampling_matrix1
+        self.sampling_matrix2 = sampling_matrix2
+        self.sampling_matrix3 = sampling_matrix3
+        
+        self.delays_matrix1 = delays_matrix1
+        self.delays_matrix2 = delays_matrix2
+        self.delays_matrix3 = delays_matrix3
+        
+        self.all_sampling_locations1 = all_sampling_locations1
+        self.all_sampling_locations2 = all_sampling_locations2
+        self.all_sampling_locations3 = all_sampling_locations3
+        
+    def set_train_data(self, U_train, y_train, index_to_go_back):
         self.U_train = U_train
         self.y_train = y_train
+        self.index_to_go_back = index_to_go_back
     
     def get_run(self, run_number, get_sampling_locations=False):
+        
+        if run_number == 1:
+            sampling_matrix = self.sampling_matrix1
+            delays_matrix = self.delays_matrix1
+            all_sampling_locations = self.all_sampling_locations1
+            offset = 0
+            
+        elif run_number == 2:
+            sampling_matrix = self.sampling_matrix2
+            delays_matrix = self.delays_matrix2
+            all_sampling_locations = self.all_sampling_locations2
+            offset = np.shape(all_sampling_locations)[0] * np.shape(all_sampling_locations)[1]
+            
+        elif run_number == 3:
+            sampling_matrix = self.sampling_matrix3
+            delays_matrix = self.delays_matrix3
+            all_sampling_locations = self.all_sampling_locations3
+            offset = 2*np.shape(all_sampling_locations)[0] * np.shape(all_sampling_locations)[1]   
+           
+            
+        r_list = []
+        block_size = np.shape(all_sampling_locations)[1]
+        for sampling_locations_for_delay_ind,sampling_locations_for_delay in enumerate(all_sampling_locations):
+                
+            local_ind= self.index_to_go_back[np.asarray(range(np.shape(sampling_locations_for_delay)[0])) + offset + sampling_locations_for_delay_ind * block_size]
+            a = self.y_train[local_ind]
 
-        sampling_matrix  = pickle.load(open('N13/sampling-matrix-{}.p'.format(run_number) ,'rb'))
-        delays_matrix = pickle.load(open('N13/delays-{}.p'.format(run_number),'rb'))
-            
-        if get_sampling_locations:
-            all_sampling_locations = pickle.load(open('N13/sampling-locations-{}.p'.format(run_number), 'rb'))
-        else:
-            all_sampling_locations = None
-            
-        if self.model_to_remove is not None:
-            if all_sampling_locations is None:
-                all_sampling_locations = pickle.load(open('N13/sampling-locations-{}.p'.format(run_number),'rb'))
-            
-            r_list = []
-            for sampling_locations_for_delay in all_sampling_locations:
-                # TODO: incorporate model here
-                
-                
-                a = []
-                for item in sampling_locations_for_delay:
-                    #print(bin_to_dec(item))
-                    a.append(self.y_train[bin_to_dec(item)])
-                r_list.append(np.asarray(a))
-             
-                #with torch.no_grad():
-                     #a = self.model_to_remove(torch.from_numpy(sampling_locations_for_delay).float())
-                #a = a.numpy().flatten()
-                #r_list.append(a)
-                
-            
-            
-            A = np.vstack(r_list)
-            #A = np.asarray(r_list)
-            ins_result = A
-            #ins_result = ins_result - A
-            
-#             print(np.shape(sampling_matrix))
-#             print(np.shape(delays_matrix))
-#             print(np.shape(ins_result))
-#             print(np.shape(all_sampling_locations))
+            r_list.append(np.asarray(a))
+
+        ins_result = np.vstack(r_list)
+
                                         
         return sampling_matrix, delays_matrix, ins_result, all_sampling_locations
         
