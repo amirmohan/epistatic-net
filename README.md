@@ -26,6 +26,6 @@ The scalable verions of the EN algorithm (EN-S) is available at `Scalable Epista
 
 2- Set `num_bits = n` and `num_delays_per_bit=d` in the `utils.py file`.
 
-3- Run `Scalable Epistatic Net (EN-S).ipynb` with the approproate links to the folder of uniform sampling patterns.
+3- Run `Scalable Epistatic Net (EN-S).ipynb` with the approproate links to the folder of uniform sampling patterns. Note that hyperparamters such as the regularization level and ADMM parameter's should be tuned based on the problem using cross validaiton.
 
 
