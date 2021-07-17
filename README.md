@@ -20,12 +20,13 @@ This repository provides the EN package which includes the scripts required to i
 # Quick start
 The EN software is conveniently available at `Epistatic Net (EN).ipynb`. The software is simple and self-explanatory. 
 
-The scalable verions of the EN algorithm (EN-S) is available at `Scalable Epistatic Net (EN-S).ipynb`. In order to run the code follow these steps:
+The scalable version of the EN algorithm (EN-S) is available at `Scalable Epistatic Net (EN-S).ipynb`. In order to run the code follow these steps:
 
 1- Run `wht-sampling.ipynb` after setting the values for the number of mutations (n), the anticipated sparsity level (2^m), and number of delays per single bit in SPRIGHT (higher values increase robustness of the algorithm to noise, d={3,5,7} are good default values). Generate the uniform sampling patterns of proteins and store them in a folder. Currently the default values are `n=13`, `m=4`, and `d=3` for the *E. quadricolor* fluorescent protein.
 
 2- Set `num_bits = n` and `num_delays_per_bit=d` in the `utils.py file`.
 
-3- Run `Scalable Epistatic Net (EN-S).ipynb` with the approproate links to the folder of uniform sampling patterns. Note that hyperparamters such as the regularization level and ADMM parameter's should be tuned based on the problem using cross validaiton.
+3- Run `Scalable Epistatic Net (EN-S).ipynb` with the appropriate links to the folder of uniform sampling patterns. Note that hyperparameters such as the regularization level and ADMM parameter's should be tuned based on the problem using cross validation.
+
 
 
